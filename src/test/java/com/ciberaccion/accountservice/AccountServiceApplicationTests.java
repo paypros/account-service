@@ -1,4 +1,4 @@
-package com.ciberaccion.account_service;
+package com.ciberaccion.accountservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
