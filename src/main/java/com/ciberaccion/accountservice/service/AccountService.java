@@ -36,12 +36,15 @@ public class AccountService {
         return toResponse(account);
     }
 
+    public AccountResponse save(Account account) {
+        return toResponse(accountRepository.save(account));
+    }
+
     private AccountResponse toResponse(Account account) {
         return new AccountResponse(
                 account.getId(),
                 account.getMerchantId(),
                 account.getBalance(),
-                account.getCurrency()
-        );
+                account.getCurrency());
     }
 }

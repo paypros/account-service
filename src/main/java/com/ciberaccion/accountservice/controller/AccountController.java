@@ -1,6 +1,7 @@
 package com.ciberaccion.accountservice.controller;
 
 import com.ciberaccion.accountservice.dto.*;
+import com.ciberaccion.accountservice.model.Account;
 import com.ciberaccion.accountservice.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,5 +26,14 @@ public class AccountController {
             @PathVariable String merchantId,
             @RequestBody DebitRequest request) {
         return ResponseEntity.ok(accountService.debit(merchantId, request));
+    }
+
+    @PostMapping
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody AccountResponse request) {
+        Account account = new Account();
+        account.setMerchantId(request.getMerchantId());
+        account.setBalance(request.getBalance());
+        account.setCurrency(request.getCurrency());
+        return ResponseEntity.ok(accountService.save(account));
     }
 }
