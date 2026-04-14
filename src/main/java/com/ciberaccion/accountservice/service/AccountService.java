@@ -4,6 +4,10 @@ import com.ciberaccion.accountservice.dto.*;
 import com.ciberaccion.accountservice.exception.AccountNotFoundException;
 import com.ciberaccion.accountservice.model.Account;
 import com.ciberaccion.accountservice.repository.AccountRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +24,13 @@ public class AccountService {
         Account account = accountRepository.findByMerchantId(merchantId)
                 .orElseThrow(() -> new AccountNotFoundException(merchantId));
         return toResponse(account);
+    }
+
+    public List<AccountResponse> getAccounts() {        
+        return accountRepository.findAll()
+        .stream()
+        .map(this::toResponse)
+        .collect(Collectors.toList());
     }
 
     @Transactional

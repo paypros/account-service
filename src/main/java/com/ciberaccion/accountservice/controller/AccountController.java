@@ -3,6 +3,9 @@ package com.ciberaccion.accountservice.controller;
 import com.ciberaccion.accountservice.dto.*;
 import com.ciberaccion.accountservice.model.Account;
 import com.ciberaccion.accountservice.service.AccountService;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,11 @@ public class AccountController {
 
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<AccountResponse>> getAccounts() {
+        return ResponseEntity.ok(accountService.getAccounts());
     }
 
     @GetMapping("/{merchantId}")
